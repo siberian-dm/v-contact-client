@@ -12,7 +12,7 @@ const currentYear = new Date().getFullYear();
     <ALayoutHeader class="main-layout-header"> <div class="main-layout-header__logo" /></ALayoutHeader>
     <ALayoutContent class="main-layout-content">
       <ABreadcrumb v-if="breadcrumb" class="main-layout-content__breadcrumb">
-        <ABreadcrumbItem v-for="item in breadcrumb" :key="item.title" :to="item.path">
+        <ABreadcrumbItem v-for="item in breadcrumb" :key="item.title">
           <RouterLink v-if="item.path" :to="item.path">{{ item.title }}</RouterLink>
           <span v-else>{{ item.title }}</span>
         </ABreadcrumbItem>
