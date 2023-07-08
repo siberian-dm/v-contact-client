@@ -1,0 +1,37 @@
+.main-layout {
+  height: 100%;
+}
+
+.main-layout-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  &__logo {
+    width: 120px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.main-layout-content {
+  padding: 0 50px;
+
+  &__breadcrumb {
+    margin: 16px 0;
+  }
+
+  &__box {
+    background: #fff;
+    padding: 0 24px 24px;
+    height: 100%;
+  }
+}
+
+.content-box-header {
+  border-bottom: 1px solid rgb(235, 237, 240);
+}
+
+.main-layout-footer {
+  text-align: center;
+}
