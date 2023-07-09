@@ -21,7 +21,7 @@ onMounted(() => {
         <AListItemMeta :title="item.fullName">
           <template #avatar><AAvatar :src="item.avatar" /></template>
           <template #description>
-            mail: <AButton type="link" :href="`mailto:${item.email}`">{{ item.email }}</AButton> phone:
+            E-mail адрес: <AButton type="link" :href="`mailto:${item.email}`">{{ item.email }}</AButton> Номер телефона:
             <AButton type="link" :href="`tel:${item.phone}`">{{ item.phone }}</AButton>
           </template>
         </AListItemMeta>

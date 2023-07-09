@@ -1,2 +1,2 @@
-import Contacts from "./index.vue"
-export default Contacts
+import Contacts from './contacts.vue';
+export default Contacts;

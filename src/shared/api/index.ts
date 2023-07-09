@@ -1,2 +1,2 @@
-export * as vContactsApi from './v-contacts';
-export * from './v-contacts/types';
+export * as vContactApi from './v-contact';
+export * from './v-contact/types';

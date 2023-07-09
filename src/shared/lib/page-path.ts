@@ -4,7 +4,7 @@ export const PAGE_PATH = {
   signIn: '/sign-in',
   contacts: {
     root: '/contacts',
-    details: (id: number) => `/contacts/${id}`,
+    details: (id: number | string) => `/contacts/${id}`,
   },
   page404: '/404',
 };

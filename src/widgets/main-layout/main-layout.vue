@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
 
 <template>
   <ALayout class="main-layout">
-    <ALayoutHeader class="main-layout-header"> <div class="main-layout-header__logo" /></ALayoutHeader>
+    <ALayoutHeader class="main-layout-header"> <div class="main-layout-header__logo">vContact</div> </ALayoutHeader>
     <ALayoutContent class="main-layout-content">
       <ABreadcrumb v-if="breadcrumb" class="main-layout-content__breadcrumb">
         <ABreadcrumbItem v-for="item in breadcrumb" :key="item.title">
@@ -18,11 +18,15 @@ const currentYear = new Date().getFullYear();
         </ABreadcrumbItem>
       </ABreadcrumb>
       <div class="main-layout-content__box">
-        <APageHeader class="content-box-header" :title="title" />
+        <APageHeader class="content-box-header" :title="title">
+          <template #extra>
+            <slot name="actions" />
+          </template>
+        </APageHeader>
         <slot />
       </div>
     </ALayoutContent>
-    <ALayoutFooter class="main-layout-footer">vContacts ©{{ currentYear }} created by siberian-dm</ALayoutFooter>
+    <ALayoutFooter class="main-layout-footer">vContact ©{{ currentYear }} created by siberian-dm</ALayoutFooter>
   </ALayout>
 </template>
 

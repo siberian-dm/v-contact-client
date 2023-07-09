@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { vContactsApi, ContactDto } from '~shared/api';
+import { vContactApi, ContactDto } from '~shared/api';
 
 export const useContactsStore = defineStore('contacts', () => {
   const data = ref<ContactDto[]>([]);
@@ -12,7 +12,7 @@ export const useContactsStore = defineStore('contacts', () => {
   async function getContactList() {
     loading.value.list = true;
     try {
-      const response = await vContactsApi.contacts.getContactList();
+      const response = await vContactApi.contacts.getContactList();
       data.value = response?.data ?? [];
     } finally {
       loading.value.list = false;
@@ -23,7 +23,7 @@ export const useContactsStore = defineStore('contacts', () => {
     loading.value.item = true;
     try {
       loading.value.item = true;
-      const response = await vContactsApi.contacts.createContact({ payload });
+      const response = await vContactApi.contacts.createContact({ payload });
       return response.data;
       // data.value = [response.data, ...data.value];
     } finally {
@@ -34,7 +34,7 @@ export const useContactsStore = defineStore('contacts', () => {
   async function getContact(id: ContactDto['id']) {
     loading.value.item = true;
     try {
-      const response = await vContactsApi.contacts.getContactById({ id });
+      const response = await vContactApi.contacts.getContactById({ id });
       return response.data;
     } finally {
       loading.value.item = false;
@@ -44,7 +44,7 @@ export const useContactsStore = defineStore('contacts', () => {
   async function updateContact({ id, ...rest }: Partial<ContactDto> & { id: ContactDto['id'] }) {
     loading.value.item = true;
     try {
-      const response = await vContactsApi.contacts.updateContact({ id, payload: rest });
+      const response = await vContactApi.contacts.updateContact({ id, payload: rest });
       return response.data;
       // const index = data.value.findIndex((item) => item.id == response.data.id);
       // data.value = [...data.value.slice(0, index), response.data, ...data.value.slice(index + 1)];
@@ -56,7 +56,7 @@ export const useContactsStore = defineStore('contacts', () => {
   async function deleteContact(id: ContactDto['id']) {
     loading.value.item = true;
     try {
-      const response = await vContactsApi.contacts.deleteContact({ id });
+      const response = await vContactApi.contacts.deleteContact({ id });
       return response.data;
       // data.value = data.value.filter((item) => item.id === response.data.id);
     } finally {
