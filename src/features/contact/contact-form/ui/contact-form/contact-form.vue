@@ -1,22 +1,18 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useForm } from 'vee-validate';
-import { computed, watch } from 'vue';
+import { computed, onUnmounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { object, string } from 'yup';
-import { useContactsStore } from '~entities/contact';
+import { useContactCrudStore } from '~entities/contact';
 
 import { ContactDto } from '~shared/api';
-import { PAGE_PATH } from '~shared/lib';
+import { PAGE_PATH } from '~shared/config';
 import { SpinBox } from '~shared/ui';
 import { FormTextField, FormActionsBox } from '~shared/ui/form';
 
-const props = defineProps<{ data?: ContactDto | null }>();
-
-const isNewContact = computed(() => !props.data);
-
-const store = useContactsStore();
-const { loading } = storeToRefs(store);
+const store = useContactCrudStore();
+const { loading, editMod, currrentEntity } = storeToRefs(store);
 
 const validationSchema = object().shape({
   fullName: string().required('Обязательное поле'),
@@ -34,18 +30,19 @@ const {
   validationSchema,
 });
 
-const submitDisabled = computed(() => !meta.value.dirty || isSubmitting.value || loading.value.item);
-const deleteDisabled = computed(() => isSubmitting.value || loading.value.item);
+const submitDisabled = computed(() => !meta.value.dirty || isSubmitting.value || loading.value);
+const deleteDisabled = computed(() => isSubmitting.value || loading.value);
+
+const router = useRouter();
 
 const handleSubmit = submit(
   async (values) => {
-    if (isNewContact.value) {
-      await store.createContact(values);
-      router.push(PAGE_PATH.contacts.root);
+    if (editMod.value) {
+      await store.updateContact(values);
     } else {
-      const result = await store.updateContact(values);
-      setValues(result);
+      await store.createContact(values);
     }
+    router.push(PAGE_PATH.contacts.root);
   },
   (ctx) => {
     // eslint-disable-next-line no-console
@@ -53,23 +50,24 @@ const handleSubmit = submit(
   }
 );
 
-const router = useRouter();
 const handleDelete = async () => {
-  if (props.data?.id) {
-    await store.deleteContact(props.data?.id);
+  if (currrentEntity.value?.id) {
+    await store.deleteContact(Number(currrentEntity?.value?.id));
     router.push(PAGE_PATH.contacts.root);
   }
 };
 
 watch(
-  () => props.data,
-  (value) => {
-    if (value?.id) {
-      setValues(value);
+  () => editMod.value,
+  async (value) => {
+    if (value) {
+      setValues(currrentEntity.value ?? {});
     }
   },
-  { deep: true }
+  { deep: true, immediate: true }
 );
+
+onUnmounted(store.resetStore);
 </script>
 
 <template>
@@ -77,7 +75,7 @@ watch(
     <FormTextField field-name="fullName" label="ФИО" />
     <FormTextField field-name="phone" label="Номер телефона" />
     <FormTextField field-name="email" label="E-mail адрес" />
-    <SpinBox v-if="loading.item" style="position: absolute" />
+    <SpinBox v-if="loading" style="position: absolute" />
   </AForm>
   <FormActionsBox>
     <APopconfirm
@@ -86,7 +84,7 @@ watch(
       cancel-text="Нет"
       :disabled="deleteDisabled"
       @confirm="handleDelete">
-      <AButton v-show="!isNewContact" danger :disabled="deleteDisabled">Удалить</AButton>
+      <AButton v-show="editMod" danger :disabled="deleteDisabled">Удалить</AButton>
     </APopconfirm>
     <AButton type="primary" :disabled="submitDisabled" @click="handleSubmit">Сохранить</AButton>
   </FormActionsBox>

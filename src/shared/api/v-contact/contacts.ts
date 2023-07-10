@@ -1,45 +1,57 @@
 import { apiInstance } from './base';
-import type { ContactDto } from './types';
+import type {
+  ContactDto,
+  GetContactListParams,
+  GetContactByIdParams,
+  CreateContactParams,
+  UpdateContactParams,
+  DeleteContactParams,
+} from './types';
 
 const BASE_URL = '/contacts';
 
-export type GetContactListParams = {
-  name?: string;
-};
-
 export const getContactList = async (params?: GetContactListParams) => {
-  return await apiInstance.get<ContactDto[]>(BASE_URL, { params });
-};
-
-export type GetContactByIdParams = {
-  id: number;
+  try {
+    const response = await apiInstance.get<ContactDto[]>(BASE_URL, { params });
+    return {
+      data: response.data,
+      meta: {
+        total: +response.headers['x-total-count'],
+      },
+    };
+  } catch {
+    return undefined;
+  }
 };
 
 export const getContactById = ({ id, ...params }: GetContactByIdParams) => {
-  return apiInstance.get<ContactDto>(`${BASE_URL}/${id}`, { params });
+  try {
+    return apiInstance.get<ContactDto>(`${BASE_URL}/${id}`, { params });
+  } catch {
+    return undefined;
+  }
 };
 
-export type CreateContactByIdParams = {
-  payload: Omit<ContactDto, 'id'>;
+export const createContact = ({ payload }: CreateContactParams) => {
+  try {
+    return apiInstance.post<ContactDto>(BASE_URL, payload);
+  } catch {
+    return undefined;
+  }
 };
 
-export const createContact = ({ payload }: CreateContactByIdParams) => {
-  return apiInstance.post<ContactDto>(BASE_URL, payload);
+export const updateContact = ({ id, payload }: UpdateContactParams) => {
+  try {
+    return apiInstance.put<ContactDto>(`${BASE_URL}/${id}`, payload);
+  } catch {
+    return undefined;
+  }
 };
 
-export type UpdateContactByIdParams = {
-  id: number;
-  payload: Partial<ContactDto>;
-};
-
-export const updateContact = ({ id, payload }: UpdateContactByIdParams) => {
-  return apiInstance.put<ContactDto>(`${BASE_URL}/${id}`, payload);
-};
-
-export type DeleteContactByIdParams = {
-  id: number;
-};
-
-export const deleteContact = ({ id }: DeleteContactByIdParams) => {
-  return apiInstance.delete<ContactDto>(`${BASE_URL}/${id}`);
+export const deleteContact = ({ id }: DeleteContactParams) => {
+  try {
+    return apiInstance.delete<ContactDto>(`${BASE_URL}/${id}`);
+  } catch {
+    return undefined;
+  }
 };

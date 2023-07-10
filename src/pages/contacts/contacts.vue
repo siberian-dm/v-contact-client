@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ContactList } from '~widgets/contact-list';
 import { MainLayout } from '~widgets/main-layout';
-import { PAGE_PATH, NEW_CONTACT_ID } from '~shared/lib';
+import { PAGE_PATH, NEW_CONTACT_ID } from '~shared/config';
 </script>
 
 <template>

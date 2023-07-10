@@ -1,2 +1,1 @@
-import ContactList from './contact-list.vue';
-export { ContactList };
+export { ContactList } from './ui';

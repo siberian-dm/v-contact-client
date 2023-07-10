@@ -1,1 +1,1 @@
-export { useContactsStore } from './model';
+export * from './model';

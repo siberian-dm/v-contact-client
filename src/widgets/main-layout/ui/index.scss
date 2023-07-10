@@ -28,11 +28,6 @@
 
   padding: 0 50px;
 
-  &__breadcrumb {
-    width: 100%;
-    margin: 16px 0;
-  }
-
   &__box {
     display: flex;
     flex-direction: column;
@@ -44,11 +39,6 @@
     padding: 0 24px 24px;
     flex-grow: 1;
   }
-}
-
-.content-box-header {
-  width: 100%;
-  border-bottom: 1px solid rgb(235, 237, 240);
 }
 
 .main-layout-footer {
