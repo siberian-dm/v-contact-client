@@ -5,7 +5,7 @@ import { PAGE_PATH, NEW_CONTACT_ID } from '~shared/config';
 </script>
 
 <template>
-  <MainLayout title="Список контактов">
+  <MainLayout>
     <template #actions>
       <RouterLink :to="PAGE_PATH.contacts.details(NEW_CONTACT_ID)">+ Добавить</RouterLink>
     </template>

@@ -1,1 +1,2 @@
-export * from './model';
+export { useContactsStore } from './model';
+export { useContactCrudStore } from './model';

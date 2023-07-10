@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { Form as FormContext } from 'vee-validate';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -32,9 +31,5 @@ onMounted(async () => {
 <template>
   <Breadcrumb :breadcrumb="breadcrumb" />
   <PageHeader :title="pageTitle" />
-  <FormContext class="contact-form">
-    <ContactForm />
-  </FormContext>
+  <ContactForm />
 </template>
-
-<style lang="scss" src="./index.scss" />

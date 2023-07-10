@@ -1,5 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { MainLayout } from '~widgets/main-layout';
+import { SignInForm } from '~features/auth/sign-in-form';
+import { PageHeader } from '~shared/ui';
+</script>
 
 <template>
-  <div>Sign In</div>
+  <MainLayout>
+    <PageHeader title="Авторизация" />
+    <SignInForm />
+  </MainLayout>
 </template>

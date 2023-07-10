@@ -5,7 +5,7 @@ import { FormContent } from '../form-content';
 </script>
 
 <template>
-  <FormContext class="contact-form">
+  <FormContext class="sign-in-form">
     <FormContent />
   </FormContext>
 </template>

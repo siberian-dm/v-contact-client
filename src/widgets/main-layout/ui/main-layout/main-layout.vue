@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { ProfileMenu } from '~features/auth';
 const currentYear = new Date().getFullYear();
 </script>
 
 <template>
   <ALayout class="main-layout">
-    <ALayoutHeader class="main-layout-header"> <div class="main-layout-header__logo">vContact</div> </ALayoutHeader>
+    <ALayoutHeader class="main-layout-header">
+      <div class="main-layout-header__logo">vContact</div>
+      <ProfileMenu />
+    </ALayoutHeader>
     <ALayoutContent class="main-layout-content">
       <div class="main-layout-content__box">
         <slot />
