@@ -1,1 +1,1 @@
-export { ContactEditor } from './ui';
+export { ContactEditor } from './ui/contact-editor';
