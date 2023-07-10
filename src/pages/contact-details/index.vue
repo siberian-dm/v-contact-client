@@ -8,5 +8,3 @@ import { MainLayout } from '~widgets/main-layout';
     <ContactEditor />
   </MainLayout>
 </template>
-
-<style lang="scss" src="./index.scss" />

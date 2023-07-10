@@ -15,6 +15,7 @@ const visible = ref(false);
 const handleMenuClick: MenuProps['onClick'] = (e) => {
   if (e.key === '1') {
     store.logout();
+    router.push(PAGE_PATH.contacts.root);
     visible.value = false;
   }
 };

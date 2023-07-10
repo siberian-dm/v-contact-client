@@ -9,7 +9,7 @@ import { useAuthStore } from '~entities/auth';
 import { UserCredentials } from '~shared/api';
 import { PAGE_PATH } from '~shared/config';
 import { SpinBox } from '~shared/ui';
-import { FormTextField, FormActionsBox } from '~shared/ui/form';
+import { FormTextField, FormPasswordField, FormActionsBox } from '~shared/ui/form';
 
 const store = useAuthStore();
 const { loading } = storeToRefs(store);
@@ -49,7 +49,7 @@ const handleSubmit = submit(
 <template>
   <AForm layout="vertical" style="position: relative">
     <FormTextField field-name="email" label="E-mail адрес" />
-    <FormTextField field-name="password" label="Пароль" />
+    <FormPasswordField field-name="password" label="Пароль" />
     <SpinBox v-if="loading" style="position: absolute" />
   </AForm>
   <FormActionsBox>

@@ -1,2 +1,2 @@
-import SignUp from "./index.vue"
-export default SignUp
+import SignUp from './sign-up.vue';
+export default SignUp;

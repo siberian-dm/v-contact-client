@@ -11,6 +11,7 @@ export const PAGE_PATH = {
     root: '/contacts',
     details: (id: number | string) => `/contacts/${id}`,
   },
+  page403: '/403',
   page404: '/404',
 };
 
